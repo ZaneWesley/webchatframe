@@ -1,4 +1,4 @@
-var PORT = process.env.PORT || 3000; // take port from heroku or for loacalhost
+var PORT = process.env.PORT || 8000; // take port from heroku or for loacalhost
 var express = require("express");
 var app = express(); // express app which is used boilerplate for HTTP
 var http = require("http").Server(app);
@@ -35,7 +35,7 @@ function sendCurrentUsers(socket) { // loading current users
   // emit message when all users list
 
   socket.emit("message", {
-    name: "Chatbot",
+    name: "Web Chat",
     text: "Current Users: " + users.join(', '),
     timestamp: moment().valueOf()
   });
@@ -55,7 +55,7 @@ io.on("connection", function(socket) {
       //broadcast leave room to only memebers of same room
       socket.broadcast.to(userdata.roomKey).emit("message", {
         text: userdata.name + " has left",
-        name: "Chatbot",
+        name: "Web Chat",
         timestamp: moment().valueOf()
       });
 
@@ -71,7 +71,7 @@ io.on("connection", function(socket) {
     socket.join(req.roomKey);
     //broadcast new user joined room
     socket.broadcast.to(req.roomKey).emit("message", {
-      name: "Chatbot",
+      name: "Web Chat",
       text: req.name + ' has joined',
       timestamp: moment().valueOf()
     });
@@ -92,9 +92,9 @@ io.on("connection", function(socket) {
   });
 
   socket.emit("message", {
-    text: "Welcome to the chat!",
+    text: "Welcome to the chat! This is where you can chat with others in the meeting.",
     timestamp: moment().valueOf(),
-    name: "Chatbot"
+    name: "Web Chat"
   });
 
   // listen for client message
