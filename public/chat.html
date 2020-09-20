@@ -188,41 +188,5 @@
     <script src="js/QueryParams.js"></script>
     <script src="js/app.js"></script>
 
-    <script>
-      document.getElementById('share-chat-btn').addEventListener("click", function() {
-        CopyToClipboard(document.getElementById('share-chat').value);
-        document.getElementById('share-output').innerText="Copied to Clipboard";
-        document.getElementById('share-output').style.display="block";
-        setTimeout(function() {
-           document.getElementById('share-output').innerText="";
-          document.getElementById('share-output').style.display="none";
-        }, 1500);
-      });
-      var modalOpen = false;
-      function displaySettings() {
-        if(modalOpen) {
-          document.getElementById('settings-box').style.display="none";
-        } else {
-          document.getElementById('settings-box').style.display="block";
-          modalOpen = true;
-        }
-      }
-      function createShareLink() {
-        var roomId = getQueryVariable("key");
-        var baseUrl = "https://zanewesley.github.io/webchat/chat";
-        var shareUrl = baseUrl + "?key=" + roomId;
-        document.getElementById('share-chat').value = shareUrl;
-      }
-      function CopyToClipboard(value) {
-        var tempInput = document.createElement("input");
-        tempInput.value = value;
-        document.body.appendChild(tempInput);
-        tempInput.select();
-        document.execCommand("copy");
-        document.body.removeChild(tempInput);
-      }
-      createShareLink();
-    </script>
-
   </body>
 </html>
